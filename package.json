@@ -1,0 +1,25 @@
+{
+  "name": "boba-madness",
+  "version": "1.0.0",
+  "description": "A calm 3D endless runner: a winged boba jumps noodle cups and fish sauce, slides under bombs and chases its best score.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "build:single": "vite build -c vite.single.config.js && node scripts/inline.mjs"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "vite": "8.3.4"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

@@ -1,0 +1,48 @@
+/* Design tokens: palette and type. Each world re-tints the UI through data-level on <html>. */
+:root {
+  --ink: #26302c; /* charcoal green */
+  --ink-soft: #66706b;
+  --paper: rgba(249, 247, 242, 0.86);
+  --paper-solid: #f7f4ee;
+  --line: rgba(38, 48, 44, 0.14);
+  --tile: #ece7de;
+  --accent: #b8784f; /* terracotta, used sparingly */
+  --title: var(--ink);
+  --title-em: #4a5751;
+  --title-label: var(--ink-soft);
+  --sky-top: #c3d1d0;
+  --sky-mid: #dfe2da;
+  --sky-low: #efe6da;
+  --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Manrope', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+/* Forest Bridge: dusk greens, warm lantern gold */
+:root[data-level='2'] {
+  --ink: #1f2b26;
+  --ink-soft: #5f6f66;
+  --paper: rgba(238, 241, 232, 0.88);
+  --paper-solid: #eef1e8;
+  --line: rgba(31, 43, 38, 0.16);
+  --tile: #dfe4d6;
+  --accent: #c0a052;
+  --title: #f1efe6;
+  --title-em: #d9c69a;
+  --title-label: rgba(241, 239, 230, 0.75);
+  --sky-top: #34443f;
+  --sky-mid: #7f8f7a;
+  --sky-low: #d9c69a;
+}
+/* Ocean Surf: pale seafoam, clay accent */
+:root[data-level='3'] {
+  --ink: #263a3e;
+  --ink-soft: #637a7e;
+  --paper: rgba(246, 248, 246, 0.86);
+  --paper-solid: #f4f6f4;
+  --line: rgba(38, 58, 62, 0.14);
+  --tile: #e3e9e8;
+  --accent: #c08a6e;
+  --sky-top: #bfd0d6;
+  --sky-mid: #d6e2e3;
+  --sky-low: #efebe2;
+}

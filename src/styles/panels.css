@@ -1,0 +1,118 @@
+/* Pause and run-complete panels. */
+/* ---------- Pause + run complete ---------- */
+.center {
+  align-items: center;
+  justify-content: center;
+  background: rgba(38, 48, 44, 0.12);
+}
+.small {
+  width: min(320px, 100%);
+  text-align: center;
+  align-items: center;
+  padding: 26px 20px 20px;
+}
+.small h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1;
+}
+.why {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+#over {
+  justify-content: flex-end;
+  align-items: center;
+}
+.over-panel {
+  max-height: calc(100% - 8px);
+  overflow: auto;
+  width: min(370px, 100%);
+  align-items: stretch;
+}
+.final {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.final strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 76px;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stats div {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stats div + div {
+  border-left: 1px solid var(--line);
+  padding-left: 14px;
+}
+.stats b {
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.newbest {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 10px;
+}
+.haul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.haul span {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 10px 2px 2px;
+  border-radius: 999px;
+  background: var(--tile);
+  font-size: 12.5px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.haul img {
+  width: 30px;
+  height: 30px;
+}
+.haul .text {
+  padding-left: 10px;
+}
+.haul .none {
+  padding: 6px 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.link {
+  align-self: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 4px 6px;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+}

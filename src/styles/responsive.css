@@ -1,0 +1,55 @@
+/* Wide screens: title left, panel right, boba between. Short screens: tighter spacing. */
+@media (min-width: 820px) and (min-aspect-ratio: 5/4) {
+  #menu .title {
+    align-self: flex-start;
+    text-align: left;
+    margin-left: 3vw;
+  }
+  #pickPanel {
+    align-self: flex-end;
+    margin: auto 3vw auto 0;
+  }
+  #over {
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: max(6vw, env(safe-area-inset-right, 0px));
+  }
+}
+@media (max-height: 820px) {
+  #aiHint {
+    display: none;
+  }
+}
+@media (max-height: 760px) {
+  .title .label {
+    display: none;
+  }
+  .title h1 {
+    font-size: clamp(36px, 7vh, 60px);
+  }
+  .panel {
+    gap: 9px;
+    padding: 14px 14px 12px;
+  }
+  .pick-name p {
+    display: none;
+  }
+  .btn {
+    height: 46px;
+  }
+  .guide img {
+    width: 36px;
+    height: 36px;
+  }
+  .final strong {
+    font-size: 60px;
+  }
+}
+@media (max-height: 560px) {
+  #menu .title {
+    display: none;
+  }
+  .guide {
+    display: none;
+  }
+}

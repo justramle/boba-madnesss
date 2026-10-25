@@ -1,0 +1,116 @@
+/* Reset, page shell and shared primitives. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+body {
+  background: var(--sky-low);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.8s;
+}
+#app {
+  position: fixed;
+  inset: 0;
+  touch-action: none;
+  background: var(--sky-low);
+}
+/* one sky per world, cross-faded on level change */
+.sky {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+.sky[data-sky='1'] {
+  background: linear-gradient(180deg, #c3d1d0 0%, #dfe2da 40%, #efe6da 64%, #efe6da 100%);
+}
+.sky[data-sky='2'] {
+  background: linear-gradient(180deg, #34443f 0%, #566860 34%, #8e9c80 60%, #c9b98c 82%, #d9c69a 100%);
+}
+.sky[data-sky='3'] {
+  background: linear-gradient(180deg, #bfd0d6 0%, #d6e2e3 40%, #e8ebe4 64%, #efebe2 100%);
+}
+:root[data-level='1'] .sky[data-sky='1'],
+:root[data-level='2'] .sky[data-sky='2'],
+:root[data-level='3'] .sky[data-sky='3'] {
+  opacity: 1;
+}
+#c {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: 0;
+  color: inherit;
+  background: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  padding-top: max(16px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.layer > * {
+  pointer-events: auto;
+}
+.label {
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#noGL {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(320px, 90%);
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--paper-solid);
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
