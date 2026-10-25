@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" data-level="1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Boba Madness</title>
+    <meta
+      name="description"
+      content="A 3D endless runner across three worlds: a winged boba runs a winter causeway, a forest bridge and the open sea, with difficulty that learns how you play."
+    />
+    <meta name="theme-color" content="#dfe2da" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@500;600;700;800&display=swap"
+    />
+    <script type="module" crossorigin src="./assets/index-DAadGUYQ.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/three-2WefDRAq.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-BguCSKIz.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="sky" data-sky="1"></div>
+      <div class="sky" data-sky="2"></div>
+      <div class="sky" data-sky="3"></div>
+      <canvas id="c" aria-label="Boba Madness game"></canvas>
+      <div id="flash" class="flash"></div>
+
+      <!-- Start screen -->
+      <section id="menu" class="layer">
+        <header class="title">
+          <p class="label">Three worlds above the clouds</p>
+          <h1>Boba <em>Madness</em></h1>
+        </header>
+        <div class="panel" id="pickPanel">
+          <div class="panel-head">
+            <p class="label">Choose your boba</p>
+            <p class="label" id="pickCount">1 / 6</p>
+          </div>
+          <div id="icons" class="icons" role="group" aria-label="Boba flavors"></div>
+          <div class="pick-name">
+            <h2 id="bname">Jasmine Milk Oolong</h2>
+            <p id="bnote">Floral oolong, softly creamy</p>
+          </div>
+          <div class="guide">
+            <div><img id="gNoodle" alt="" /><b>Noodle cup</b><span>Hop over</span></div>
+            <div><img id="gFish" alt="" /><b>Fish sauce</b><span>Jump over</span></div>
+            <div><img id="gBomb" alt="" /><b>Bomb</b><span>Slide under</span></div>
+            <div><img id="gCloud" alt="" /><b>Cloud</b><span>Jump in: +50</span></div>
+          </div>
+          <button id="startBtn" class="btn">Start</button>
+          <div class="foot">
+            <span id="bestMenu">No best yet</span>
+            <span class="toggles">
+              <button class="tg tg-ai" aria-pressed="true" title="The game learns how you play and tunes the challenge">
+                Adaptive AI
+              </button>
+              <button class="tg tg-music" aria-pressed="true">Music</button>
+              <button class="tg tg-sfx" aria-pressed="true">Sound</button>
+            </span>
+          </div>
+          <p class="hint" id="aiHint">
+            Adaptive AI watches every obstacle you clear or miss and tunes the next ones to your skill.
+          </p>
+        </div>
+      </section>
+
+      <!-- In-run HUD -->
+      <section id="hud" class="layer" hidden>
+        <div class="hud-left">
+          <div class="score" id="pill"><span class="label">Score</span><span id="score">0</span></div>
+          <div class="lvl" id="lvlTag">
+            <span><b id="lvlNum">1</b><span id="lvlName">Winter Mountain</span><em id="lvlNext"></em></span
+            ><i><s id="lvlBar"></s></i>
+          </div>
+          <div id="shieldTag" class="power-tag" hidden>Shield on</div>
+          <div id="swordTag" class="power-tag sword" hidden>Sword <s id="swordBar"></s></div>
+          <div id="magnetTag" class="power-tag magnet" hidden>Magnet <s id="magnetBar"></s></div>
+          <div id="comboTag" class="combo" hidden>
+            <b id="comboX">3</b><span id="comboLbl">Combo</span><i><s id="comboBar"></s></i>
+          </div>
+          <div id="aiTag" class="ai" hidden>
+            <span class="label">AI</span><b id="aiVal">30%</b><em id="aiArrow"></em>
+          </div>
+          <div id="pop"></div>
+        </div>
+        <button id="pauseBtn" class="round" aria-label="Pause">
+          <span><i></i><i></i></span>
+        </button>
+        <p id="tip" class="tip" hidden>↑ jump · ↓ slide · ← → lane</p>
+        <div id="banner" class="banner" hidden><small id="bannerSmall"></small><strong id="bannerBig"></strong></div>
+      </section>
+
+      <!-- Pause -->
+      <section id="paused" class="layer center" hidden>
+        <div class="panel small">
+          <h2>Paused</h2>
+          <p class="why">Take a breath. The road will wait.</p>
+          <button id="resumeBtn" class="btn">Resume</button>
+          <div class="toggles">
+            <button class="tg tg-music" aria-pressed="true">Music</button>
+            <button class="tg tg-sfx" aria-pressed="true">Sound</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Run complete -->
+      <section id="over" class="layer" hidden>
+        <div class="panel over-panel">
+          <p class="label">Run complete</p>
+          <div class="final">
+            <strong id="finalScore">0</strong><span class="newbest" id="newBest" hidden>New best</span>
+          </div>
+          <p class="why" id="why">Ran into the fish sauce.</p>
+          <div class="haul" id="haul"></div>
+          <div class="stats">
+            <div><span class="label">Distance</span><b id="rDist">0 m</b></div>
+            <div><span class="label">World</span><b id="rLevel">1</b></div>
+            <div><span class="label">Combo</span><b id="rCombo">×1</b></div>
+            <div><span class="label">Best</span><b id="rBest">0</b></div>
+          </div>
+          <button id="againBtn" class="btn">Play again</button>
+          <button id="chooseBtn" class="link">Choose another boba</button>
+        </div>
+      </section>
+
+      <p id="noGL" hidden>This game needs WebGL. Try another browser or turn on hardware acceleration.</p>
+    </div>
+
+  </body>
+</html>
