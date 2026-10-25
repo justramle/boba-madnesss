@@ -1,4 +1,4 @@
-// Adaptive difficulty.
+// Adaptive Learning difficulty.
 //
 // The game learns how you play and keeps serving obstacle rows that you clear about 75% of
 // the time: hard enough to be exciting, never hopeless. Read this file top to bottom; it is
