@@ -20,26 +20,26 @@ There are only 3 levels. Every 2,000 m (`LEVEL_LENGTH` in `src/config.js`) the r
 `src/ai/adaptive.js` is a small on-device learner, not a trained offline model: no neural net, no batching, just a linear model updated one example at a time as you play. It frames difficulty as three cooperating parts:
 
 **1. Predictive model — online logistic regression**
-- Task: binary classification — will you clear the next row?
+- Task: binary classification: will you clear the next row?
 - Nine obstacle patterns (single hop … mixed wall), each with a hand-set prior difficulty
 - Each row is encoded as a 13-dim feature vector: `[bias, pattern difficulty, normalized speed, normalized level, one-hot pattern id]`
 - Scored by a single linear layer + sigmoid: `P(clear) = σ(w · x)`
 - After every row, one SGD step updates the weights toward the observed outcome: `err = cleared − P(clear)`, `w += learningRate * err * x`, `learningRate = 0.12`
-- Incremental, per-sample training — no replay buffer
+- Incremental, per-sample training, no replay buffer
 
-**2. Exploration — Thompson-sampling bandit**
+**2. Explorationz /w Thompson-sampling bandit**
 - Alongside the model, each pattern keeps a Beta(wins, losses) posterior (prior Beta(1,1))
-- A sample from that posterior is blended with the model's prediction (`0.65 * model + 0.35 * bandit sample`) so under-tried patterns still get picked even if the model is confident about them
-- The next pattern isn't the argmax — candidates are scored by closeness of this blended estimate to the 75% target (a Gaussian kernel around the target, penalized for repeating a pattern), then sampled from that score distribution — keeping some variety instead of always picking the single best option
+- A sample from that posterior is blended with the model's prediction (`0.65 * model + 0.35 * bandit sample`) so undertried patterns still get picked even if the model is confident about them
+- The next pattern isn't the argmax: candidates are scored by closeness of this blended estimate to the 75% target (a Gaussian kernel around the target, penalized for repeating a pattern), then sampled from that score distribution, keeping some variety instead of always picking the single best option
 
 **3. Control loop — the challenge dial**
 - Separately from the model and bandit, a scalar **challenge dial** (0–100%) tracks your clear rate over the last 8 rows (`ADAPTIVE.window`)
 - Nudged toward a 75% target (`ADAPTIVE.target`) each row: eases down fast on a crash, drifts toward the target afterward (faster when easing than when tightening)
-- This dial is what actually scales speed, row spacing and shield frequency, and caps how hard a pattern may be — a feedback controller sitting on top of the model, not a learned parameter itself
+- This dial is what actually scales speed, row spacing and shield frequency, and caps how hard a pattern may be, a feedback controller sitting on top of the model, not a learned parameter itself
 
 **Constants:** `ADAPTIVE = { target: 0.75, window: 8, learningRate: 0.12 }` in `src/config.js`.
 
-Everything (weights, win/loss counts, dial) saves to `localStorage`, so it picks up where you left off. The **Adaptive AI** toggle turns it off in favor of a fixed curve; the results panel shows what it did.
+Everything (weights, win/loss counts, dial) saves to `localStorage`, it to picks up where you left off. The **Adaptive AI** toggle turns it off in favor of a fixed curve; the results panel shows what it did.
 
 ## Getting started
 
